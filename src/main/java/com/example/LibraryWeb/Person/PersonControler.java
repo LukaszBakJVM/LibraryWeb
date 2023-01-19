@@ -2,12 +2,11 @@ package com.example.LibraryWeb.Person;
 
 import com.example.LibraryWeb.Book.BookDto;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
+import java.net.URI;
 import java.util.Set;
 
 @RestController
@@ -26,7 +25,14 @@ public class PersonControler {
         }
         return ResponseEntity.ok(personServices.getBooksByPersonId(id));
     }
-
+    @PostMapping
+ResponseEntity<PersonDtoSave>savePerson(@RequestBody PersonDtoSave personDto){
+        PersonDtoSave personDtoSave = personServices.personSave(personDto);
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
+            .path("/{id}").buildAndExpand(personDtoSave.getId())
+            .toUri();
+   return ResponseEntity.created(uri).body(personDtoSave);
+}
 
 
 }

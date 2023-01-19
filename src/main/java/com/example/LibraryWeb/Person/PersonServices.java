@@ -19,6 +19,7 @@ public class PersonServices {
     private final BookRepository bookRepository;
     private final BookDtoMaper bookDtoMaper;
 
+
     public PersonServices(PersonRepository personRepository, PersonDtoMaper personDtoMaper,
                           BookRepository bookRepository, BookDtoMaper bookDtoMaper) {
         this.personRepository = personRepository;
@@ -31,5 +32,10 @@ public class PersonServices {
         return   bookRepository.findBooksByPersonId(id)
                 .stream().map(bookDtoMaper::mapBook) .collect(Collectors.toSet());
 
+    }
+    PersonDtoSave personSave(PersonDtoSave personDtoSave){
+        Person personToSave = personDtoMaper.person(personDtoSave);
+        Person save = personRepository.save(personToSave);
+        return personDtoMaper.dtoSave(save);
     }
 }
