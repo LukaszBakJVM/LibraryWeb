@@ -19,7 +19,7 @@ public class PersonControler {
     public PersonControler(PersonServices personServices) {
         this.personServices = personServices;
     }
-   @GetMapping("list/{id}")
+   @GetMapping("/list/{id}")
    ResponseEntity<Set<BookDto>> listById(@PathVariable long id){
         if (personServices.getBooksByPersonId(id).isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -33,7 +33,7 @@ public class PersonControler {
                 .orElse(ResponseEntity.notFound().build());
 
     }
-    @GetMapping("{/id}")
+    @GetMapping("/{id}")
     ResponseEntity<PersonDto>findById(@PathVariable long id){
         return personServices.getPersonById(id)
                 .map(ResponseEntity::ok)
