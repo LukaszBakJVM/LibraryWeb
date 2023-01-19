@@ -8,6 +8,7 @@ import com.example.LibraryWeb.Book.BookRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -26,6 +27,10 @@ public class PersonServices {
         this.personDtoMaper = personDtoMaper;
         this.bookRepository = bookRepository;
         this.bookDtoMaper = bookDtoMaper;
+    }
+    Optional<PersonDto>getPersonByPesel(int id){
+        return personRepository.findPersonByPesel(id)
+                .map(personDtoMaper::dto);
     }
 
     Set<BookDto>getBooksByPersonId(long id){

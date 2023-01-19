@@ -7,6 +7,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import java.net.URI;
+import java.util.Optional;
 import java.util.Set;
 
 @RestController
@@ -25,6 +26,14 @@ public class PersonControler {
         }
         return ResponseEntity.ok(personServices.getBooksByPersonId(id));
     }
+    @GetMapping("/pesel/{pesel}")
+    ResponseEntity<PersonDto> findByPesel(@PathVariable int pesel){
+        return personServices.getPersonByPesel(pesel)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+
+    }
+
     @PostMapping
 ResponseEntity<PersonDtoSave>savePerson(@RequestBody PersonDtoSave personDto){
         PersonDtoSave personDtoSave = personServices.personSave(personDto);
