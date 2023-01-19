@@ -38,6 +38,10 @@ public class PersonServices {
                 .stream().map(bookDtoMaper::mapBook) .collect(Collectors.toSet());
 
     }
+    Optional<PersonDto>getPersonById(long id){
+        return personRepository.findById(id)
+                .map(personDtoMaper::dto);
+    }
     PersonDtoSave personSave(PersonDtoSave personDtoSave){
         Person personToSave = personDtoMaper.person(personDtoSave);
         Person save = personRepository.save(personToSave);

@@ -7,7 +7,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 
 import java.net.URI;
-import java.util.Optional;
+
 import java.util.Set;
 
 @RestController
@@ -19,7 +19,7 @@ public class PersonControler {
     public PersonControler(PersonServices personServices) {
         this.personServices = personServices;
     }
-   @GetMapping("/{id}")
+   @GetMapping("list/{id}")
    ResponseEntity<Set<BookDto>> listById(@PathVariable long id){
         if (personServices.getBooksByPersonId(id).isEmpty()) {
             return ResponseEntity.notFound().build();
@@ -32,6 +32,12 @@ public class PersonControler {
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
 
+    }
+    @GetMapping("{/id}")
+    ResponseEntity<PersonDto>findById(@PathVariable long id){
+        return personServices.getPersonById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
