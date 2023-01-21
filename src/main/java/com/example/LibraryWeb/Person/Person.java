@@ -15,7 +15,7 @@ public class Person {
     private String firstName;
     private String lastName;
     private int pesel;
-    @OneToMany(mappedBy = "person")
+    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     private Set<Book>bookSet =new TreeSet<>();
 
     public Person() {

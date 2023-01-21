@@ -5,6 +5,7 @@ package com.example.LibraryWeb.Person;
 import com.example.LibraryWeb.Book.BookDto;
 import com.example.LibraryWeb.Book.BookDtoMaper;
 import com.example.LibraryWeb.Book.BookRepository;
+
 import org.springframework.stereotype.Service;
 
 
@@ -28,23 +29,54 @@ public class PersonServices {
         this.bookRepository = bookRepository;
         this.bookDtoMaper = bookDtoMaper;
     }
-    Optional<PersonDto>getPersonByPesel(int id){
+
+    Optional<PersonDtoSave> getPersonByPesel(int id) {
         return personRepository.findPersonByPesel(id)
-                .map(personDtoMaper::dto);
+                .map(personDtoMaper::dtoSave);
     }
 
-    Set<BookDto>getBooksByPersonId(long id){
-        return   bookRepository.findBooksByPersonId(id)
-                .stream().map(bookDtoMaper::mapBook) .collect(Collectors.toSet());
+    Set<BookDto> getBooksByPersonId(long id) {
+        return bookRepository.findBooksByPersonId(id)
+                .stream().map(bookDtoMaper::mapBook).collect(Collectors.toSet());
 
     }
-    Optional<PersonDto>getPersonById(long id){
+
+    Optional<PersonDto> getPersonById(long id) {
         return personRepository.findById(id)
-                .map(personDtoMaper::dto);
+                .map(personDtoMaper::dtoRead);
     }
-    PersonDtoSave personSave(PersonDtoSave personDtoSave){
-        Person personToSave = personDtoMaper.person(personDtoSave);
+
+    PersonDtoSave personSave(PersonDtoSave personDtoSave) {
+        Person personToSave = personDtoMaper.personSave(personDtoSave);
         Person save = personRepository.save(personToSave);
         return personDtoMaper.dtoSave(save);
     }
+ public    void personUpdate(PersonDtoSave personDtoSave) {
+     Optional<Person> byId = personRepository.findById(personDtoSave.getId());
+
+     if (byId.isPresent()) {
+         Person person = personDtoMaper.personSave(personDtoSave);
+         personRepository.save(person);
+     }
+ }
+
+   Optional<PersonDtoSave> getPersonSaveById(long id) {
+        return personRepository.findById(id)
+                .map(personDtoMaper::dtoSave);
+    }
+    public  void deleteById( long id){
+        personRepository.deleteById(id);
+
+
+
+
+    }
+    public void  deleteByPesel(int pesel){
+        personRepository.deleteByPesel(pesel);
+    }
+
+
+
+
+
 }
