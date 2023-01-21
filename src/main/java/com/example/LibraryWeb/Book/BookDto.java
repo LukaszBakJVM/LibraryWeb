@@ -1,8 +1,8 @@
 package com.example.LibraryWeb.Book;
 
-import java.util.Comparator;
 
-public class BookDto implements Comparator<BookDto> {
+
+public class BookDto  {
     long id;
     private String bookName;
     private String author;
@@ -10,6 +10,7 @@ public class BookDto implements Comparator<BookDto> {
     private long personId;
     private String personFirstName;
     private String personLastName;
+    private int personPesel;
 
     public long getId() {
         return id;
@@ -67,10 +68,12 @@ public class BookDto implements Comparator<BookDto> {
         this.personLastName = personLastName;
     }
 
+    public int getPersonPesel() {
+        return personPesel;
+    }
 
-    @Override
-    public int compare(BookDto o1, BookDto o2) {
-        return Long.compare(o1.id,o2.id);
+    public void setPersonPesel(int personPesel) {
+        this.personPesel = personPesel;
     }
 }
 
