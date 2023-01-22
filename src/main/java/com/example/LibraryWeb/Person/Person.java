@@ -3,6 +3,7 @@ package com.example.LibraryWeb.Person;
 import com.example.LibraryWeb.Book.Book;
 import jakarta.persistence.*;
 
+
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -12,8 +13,11 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     private String firstName;
     private String lastName;
+
+
     private int pesel;
     @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     private Set<Book>bookSet =new TreeSet<>();

@@ -3,8 +3,6 @@ package com.example.LibraryWeb.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Service
 public class BookServices {
@@ -15,18 +13,24 @@ public class BookServices {
         this.bookRepository = bookRepository;
         this.bookDtoMaper = bookDtoMaper;
     }
+    Optional<BookDto>getBookById(long id){
+        return bookRepository.findById(id)
+                .map(bookDtoMaper::mapBook);
+    }
 
     Optional<BookDto>findByBookName(String name) {
        return bookRepository.findByBookName(name)
                 .map(bookDtoMaper::mapBook);
     }
-    Optional<BookDto>getByIsbn(String isbn){
+    Optional<BookDto> getBookByIsbn(String isbn){
       return   bookRepository.findByIsbn(isbn)
                 .map(bookDtoMaper::mapBook);
     }
-    Set<BookDto>getBooksByPersonId(long id){
-      return   bookRepository.findBooksByPersonId(id)
-              .stream().map(bookDtoMaper::mapBook)
-              .collect(Collectors.toSet());
+  public   BookDtoSaveBook saveBook(BookDtoSaveBook bookDto){
+        Book book = bookDtoMaper.book(bookDto);
+        Book save = bookRepository.save(book);
+        return bookDtoMaper.saveBook(save);
+
     }
+
 }
