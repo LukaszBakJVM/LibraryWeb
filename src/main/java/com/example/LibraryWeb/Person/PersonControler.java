@@ -1,6 +1,7 @@
 package com.example.LibraryWeb.Person;
 
 import com.example.LibraryWeb.Book.BookDto;
+import com.example.LibraryWeb.Exception.PersonNotFoundException;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -63,7 +64,8 @@ public class PersonControler {
     @PatchMapping("/{id}")
     ResponseEntity<?> updatePersonDtoSave(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
         try {
-            PersonDtoSave personDtoSave = personServices.getPersonSaveById(id).orElseThrow();
+            PersonDtoSave personDtoSave = personServices.getPersonSaveById(id)
+                    .orElseThrow(()->new  PersonNotFoundException("Nie znaleziono osoby o id "+id));
             PersonDtoSave update = applyPatch(personDtoSave, patch);
             personServices.personUpdate(update);
 

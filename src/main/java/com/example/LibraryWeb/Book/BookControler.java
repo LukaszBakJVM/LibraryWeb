@@ -1,10 +1,17 @@
 package com.example.LibraryWeb.Book;
 
+import com.example.LibraryWeb.Exception.PersonNotFoundException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.fge.jsonpatch.JsonPatchException;
+import com.github.fge.jsonpatch.mergepatch.JsonMergePatch;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+import java.util.NoSuchElementException;
 
 
 @RestController
@@ -12,9 +19,11 @@ import java.net.URI;
 
 public class BookControler {
     private final BookServices bookServices;
+    private final ObjectMapper objectMapper;
 
-    public BookControler(BookServices bookServices) {
+    public BookControler(BookServices bookServices, ObjectMapper objectMapper) {
         this.bookServices = bookServices;
+        this.objectMapper = objectMapper;
     }
     @GetMapping("/{id}")
     ResponseEntity<BookDto>findById(@PathVariable long id){
@@ -41,6 +50,32 @@ public class BookControler {
                 .path("/{id}").buildAndExpand(bookToSave.getId())
                 .toUri();
         return ResponseEntity.created(uri).body(bookToSave);
+
+    }
+    @PatchMapping("/{id}")
+    ResponseEntity<?> rentBook(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
+        try {
+            BookDto bookDto = bookServices.getBookById(id)
+                    .orElseThrow(() -> new PersonNotFoundException("Nie znaleziono osoby o id " + id));
+            BookDto update = applyPatch(bookDto, patch);
+            bookServices.rentbook(update);
+
+        } catch (NoSuchElementException e) {
+            return ResponseEntity.notFound().build();
+
+
+        } catch (JsonPatchException | JsonProcessingException e) {
+            return ResponseEntity.internalServerError().build();
+        }
+
+
+        return ResponseEntity.noContent().build();
+    }
+
+    private BookDto applyPatch(BookDto bookDto, JsonMergePatch patch) throws JsonPatchException, JsonProcessingException {
+        JsonNode jsonNode = objectMapper.valueToTree(bookDto);
+        JsonNode apply = patch.apply(jsonNode);
+        return objectMapper.treeToValue(apply,BookDto.class);
 
     }
    

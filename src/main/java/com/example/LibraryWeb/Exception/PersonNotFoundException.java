@@ -1,7 +1,7 @@
 package com.example.LibraryWeb.Exception;
 
-public class PersonNotFoundException extends Exception{
+public class PersonNotFoundException extends RuntimeException{
     public PersonNotFoundException(String message) {
-        super("Person not Found");
+        super(message);
     }
 }

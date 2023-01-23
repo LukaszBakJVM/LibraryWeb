@@ -1,25 +1,32 @@
 package com.example.LibraryWeb.Book;
 
 
+import com.example.LibraryWeb.Exception.PersonNotFoundException;
+import com.example.LibraryWeb.Person.Person;
+import com.example.LibraryWeb.Person.PersonRepository;
 import org.springframework.stereotype.Service;
+
+
 
 @Service
 
 public  class BookDtoMaper {
+    private final PersonRepository personRepository;
+
+    public BookDtoMaper(PersonRepository personRepository) {
+        this.personRepository = personRepository;
+    }
 
 
-
-
-
-    public BookDto rentBook(Book book) {
-        BookDto dto = new BookDto();
+    public Book rentBook(BookDto book) {
+        Book dto = new Book();
         dto.setId(book.getId());
         dto.setBookName(book.getBookName());
         dto.setAuthor(book.getAuthor());
         dto.setIsbn(book.getIsbn());
-        dto.setPersonId(book.getPerson().getId());
-       dto.setPersonFirstName(book.getPerson().getFirstName());
-        dto.setPersonLastName(book.getPerson().getLastName());
+        Person person = personRepository.findById(dto.getPerson().getId())
+                .orElseThrow(()->new  PersonNotFoundException("Nie znaleziono osoby o podanym  id "));
+        dto.setPerson(person);
         return dto;
     }
 
@@ -48,6 +55,10 @@ public  class BookDtoMaper {
         dto.setBookName(book.getBookName());
         dto.setAuthor(book.getAuthor());
         dto.setIsbn(book.getIsbn());
+        dto.setPersonId(book.getPerson().getId());
+        dto.setPersonFirstName(book.getPerson().getFirstName());
+        dto.setPersonLastName(book.getPerson().getLastName());
+        dto.setPersonPesel(book.getPerson().getPesel());
         return dto;
     }
 }

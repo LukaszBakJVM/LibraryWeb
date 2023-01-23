@@ -52,7 +52,8 @@ public class PersonServices {
         return personDtoMaper.dtoSave(save);
     }
  public    void personUpdate(PersonDtoSave personDtoSave) {
-     Optional<Person> byId = personRepository.findById(personDtoSave.getId());
+     Person p = personDtoMaper.personSave(personDtoSave);
+     Optional<Person> byId = personRepository.findById(p.getId());
 
      if (byId.isPresent()) {
          Person person = personDtoMaper.personSave(personDtoSave);
