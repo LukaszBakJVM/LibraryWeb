@@ -18,16 +18,18 @@ public  class BookDtoMaper {
     }
 
 
-    public Book rentBook(BookDto book) {
-        Book dto = new Book();
-        dto.setId(book.getId());
-        dto.setBookName(book.getBookName());
-        dto.setAuthor(book.getAuthor());
-        dto.setIsbn(book.getIsbn());
-        Person person = personRepository.findById(dto.getPerson().getId())
-                .orElseThrow(()->new  PersonNotFoundException("Nie znaleziono osoby o podanym  id "));
-        dto.setPerson(person);
-        return dto;
+    public Book rentBook(BookDto bookDto) {
+        Book book = new Book();
+        book.setId(bookDto.getId());
+        book.setBookName(bookDto.getBookName());
+        book.setAuthor(bookDto.getAuthor());
+        book.setIsbn(bookDto.getIsbn());
+       Person person = personRepository.findById(bookDto.getPersonId())
+               .orElseThrow(()->new  PersonNotFoundException("Nie znaleziono osoby o podanym  id "));
+       book.setPerson(person);
+
+
+        return book;
     }
 
     public Book book(BookDtoSaveBook bookDto) {

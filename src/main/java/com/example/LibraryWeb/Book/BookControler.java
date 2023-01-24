@@ -58,7 +58,7 @@ public class BookControler {
             BookDto bookDto = bookServices.getBookById(id)
                     .orElseThrow(() -> new PersonNotFoundException("Nie znaleziono osoby o id " + id));
             BookDto update = applyPatch(bookDto, patch);
-            bookServices.rentbook(update);
+            bookServices.rentBook(update);
 
         } catch (NoSuchElementException e) {
             return ResponseEntity.notFound().build();

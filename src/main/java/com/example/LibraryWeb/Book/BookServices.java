@@ -37,7 +37,7 @@ public class BookServices {
 
     }
 
-    public void rentbook(BookDto bookDto) {
+    public void rentBook(BookDto bookDto) {
         Book book = bookDtoMaper.rentBook(bookDto);
 
         Optional<Book> byId = bookRepository.findById(book.getId());
