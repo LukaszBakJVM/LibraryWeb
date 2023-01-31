@@ -35,8 +35,8 @@ public class PersonServices {
                 .map(personDtoMaper::dtoSave);
     }
 
-    Set<BookDto> getBooksByPersonId(long id) {
-        return bookRepository.findBooksByPersonId(id)
+    Set<BookDto> getBooksByPersonUsername(String userName) {
+        return bookRepository.findBooksByPersonUserName(userName)
                 .stream().map(bookDtoMaper::mapBook).collect(Collectors.toSet());
 
     }
@@ -51,7 +51,7 @@ public class PersonServices {
         Person save = personRepository.save(personToSave);
         return personDtoMaper.dtoSave(save);
     }
- public    void personUpdate(PersonDtoSave personDtoSave) {
+public    void personUpdate(PersonDtoSave personDtoSave) {
      Person p = personDtoMaper.personSave(personDtoSave);
      Optional<Person> byId = personRepository.findById(p.getId());
 
@@ -74,6 +74,9 @@ public class PersonServices {
     }
     public void  deleteByPesel(int pesel){
         personRepository.deleteByPesel(pesel);
+    }
+    public void  deleteByUserName(String userName){
+        personRepository.deletePersonByUserName(userName);
     }
 
 

@@ -25,24 +25,28 @@ public class BookControler {
         this.bookServices = bookServices;
         this.objectMapper = objectMapper;
     }
+    //Admin
     @GetMapping("/{id}")
     ResponseEntity<BookDto>findById(@PathVariable long id){
         return bookServices.getBookById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-    @GetMapping("bookName/{bookName}")
+    //Admin
+    @GetMapping("/bookName/{bookName}")
     ResponseEntity<BookDto>findByBookName(@PathVariable String bookName){
         return bookServices.findByBookName(bookName)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    //Admin
     @GetMapping("/isbn/{isbn}")
     ResponseEntity<BookDto>findByIsbn(@PathVariable String isbn){
         return bookServices.getBookByIsbn(isbn)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
+    //Admin
     @PostMapping()
     ResponseEntity<BookDtoSaveBook>saveBook(@RequestBody BookDtoSaveBook bookDto){
         BookDtoSaveBook bookToSave = bookServices.saveBook(bookDto);
@@ -52,6 +56,7 @@ public class BookControler {
         return ResponseEntity.created(uri).body(bookToSave);
 
     }
+    //All
     @PatchMapping("/{id}")
     ResponseEntity<?> rentBook(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
         try {

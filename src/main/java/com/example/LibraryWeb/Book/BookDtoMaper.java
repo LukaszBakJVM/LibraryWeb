@@ -53,14 +53,11 @@ public  class BookDtoMaper {
     }
     public BookDto mapBook(Book book) {
         BookDto dto = new BookDto();
-        dto.setId(book.getId());
         dto.setBookName(book.getBookName());
         dto.setAuthor(book.getAuthor());
         dto.setIsbn(book.getIsbn());
         dto.setPersonId(book.getPerson().getId());
-        dto.setPersonFirstName(book.getPerson().getFirstName());
-        dto.setPersonLastName(book.getPerson().getLastName());
-        dto.setPersonPesel(book.getPerson().getPesel());
+       dto.setUserName(book.getPerson().getUserName());
         return dto;
     }
 }

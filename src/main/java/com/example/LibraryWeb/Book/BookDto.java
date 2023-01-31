@@ -8,6 +8,7 @@ public class BookDto  {
     private String author;
     private String isbn;
     private long personId;
+    private String userName;
     private String personFirstName;
     private String personLastName;
     private int personPesel;
@@ -50,6 +51,14 @@ public class BookDto  {
 
     public void setPersonId(long personId) {
         this.personId = personId;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPersonFirstName() {

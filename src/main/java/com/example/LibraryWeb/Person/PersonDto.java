@@ -1,9 +1,10 @@
 package com.example.LibraryWeb.Person;
 
 public class PersonDto {
-    private long id;
-    private String firstName;
-    private String lastName;
+    private  long id;
+
+    private String userName;
+    private String email;
 
     public long getId() {
         return id;
@@ -13,22 +14,19 @@ public class PersonDto {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getEmail() {
+        return email;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setEmail(String email) {
+        this.email = email;
     }
-
-
-
 }

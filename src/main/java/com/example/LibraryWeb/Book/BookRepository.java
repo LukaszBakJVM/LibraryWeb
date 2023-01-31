@@ -6,7 +6,8 @@ import java.util.Optional;
 import java.util.Set;
 
 public  interface BookRepository extends CrudRepository<Book,Long> {
+
     Optional<Book> findByBookName(String bookName);
     Optional<Book>findByIsbn(String isbn);
-    Set<Book> findBooksByPersonId(long id);
+    Set<Book> findBooksByPersonUserName(String userName);
 }

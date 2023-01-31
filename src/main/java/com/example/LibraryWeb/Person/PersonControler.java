@@ -24,19 +24,20 @@ public class PersonControler {
     private final PersonServices personServices;
     private final ObjectMapper objectMapper;
 
+
     public PersonControler(PersonServices personServices, ObjectMapper objectMapper) {
         this.personServices = personServices;
         this.objectMapper = objectMapper;
     }
-
-    @GetMapping("/list/{id}")
-    ResponseEntity<Set<BookDto>> listById(@PathVariable long id) {
-        if (personServices.getBooksByPersonId(id).isEmpty()) {
+//Admin i wlasciciel
+    @GetMapping("/list/{userName}")
+    ResponseEntity<Set<BookDto>> listByUserName(@PathVariable String userName) {
+        if (personServices.getBooksByPersonUsername(userName).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.ok(personServices.getBooksByPersonId(id));
+        return ResponseEntity.ok(personServices.getBooksByPersonUsername(userName));
     }
-
+//Admin
     @GetMapping("/pesel/{pesel}")
     ResponseEntity<PersonDtoSave> findByPesel(@PathVariable int pesel) {
         return personServices.getPersonByPesel(pesel)
@@ -45,13 +46,14 @@ public class PersonControler {
 
     }
 
+//user
     @GetMapping("/{id}")
     ResponseEntity<PersonDto> findById(@PathVariable long id) {
         return personServices.getPersonById(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
-
+//All
     @PostMapping
     ResponseEntity<PersonDtoSave> savePerson(@RequestBody PersonDtoSave personSaveDto) {
         PersonDtoSave personDtoSave = personServices.personSave(personSaveDto);
@@ -60,7 +62,7 @@ public class PersonControler {
                 .toUri();
         return ResponseEntity.created(uri).body(personDtoSave);
     }
-
+//Admin i własciciel konta
     @PatchMapping("/{id}")
     ResponseEntity<?> updatePersonDtoSave(@PathVariable Long id, @RequestBody JsonMergePatch patch) {
         try {
@@ -87,6 +89,7 @@ public class PersonControler {
         return objectMapper.treeToValue(apply,PersonDtoSave.class);
 
     }
+    // admin i wlasciciel konta
     @DeleteMapping("/{id}")
     ResponseEntity<?>delteById(@PathVariable long id){
         personServices.deleteById(id);

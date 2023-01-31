@@ -25,7 +25,7 @@ public class Book implements Comparator<Book> {
     }
 
     @ManyToOne
-    @JoinColumn(name = "person_id")
+   // @JoinColumn(name = "person_id")
   private Person person;
 
     public Book() {

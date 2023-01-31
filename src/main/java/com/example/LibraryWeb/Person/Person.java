@@ -13,17 +13,22 @@ public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-
+    //dostep User
+    private String userName;
+    private String email;
+// dostemp Admin -vice
     private String firstName;
     private String lastName;
-
-
     private int pesel;
-    @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
+    //hash nie dostepe
+    private String password;
+   // @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.EAGER)
+    @JoinTable (name = "Wyporzyczone"
+            ,joinColumns = @JoinColumn(name = "uzyrkownwik",referencedColumnName = "lastName")
+            ,inverseJoinColumns = @JoinColumn(name ="ksiazki",referencedColumnName = "bookName")
+    )
     private Set<Book>bookSet =new TreeSet<>();
-
-    public Person() {
-    }
 
     public long getId() {
         return id;
@@ -31,6 +36,22 @@ public class Person {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getFirstName() {
@@ -55,6 +76,14 @@ public class Person {
 
     public void setPesel(int pesel) {
         this.pesel = pesel;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public Set<Book> getBookSet() {
