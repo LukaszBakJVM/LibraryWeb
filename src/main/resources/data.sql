@@ -98,7 +98,7 @@ insert into person (user_name, email, first_name, last_name, pesel, password) va
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Rochella Barkway', 'rbarkway2p@nsw.gov.au', 'Rochella', 'Barkway', '66', 'Salinas');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Granny Garey', 'ggarey2q@ovh.net', 'Granny', 'Garey', '05676', 'Kimwarer');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Sharyl Alldre', 'salldre2r@livejournal.com', 'Sharyl', 'Alldre', '0', 'Degah Bur');
-
+insert into person (user_name, email, first_name, last_name, pesel, password) values ('bbzzyyczczeek','lukasz.bak@interiowy.pl', null, null, '0', 'pass');
 
 INSERT INTO
     book(book_name,author,isbn,quantity)
@@ -120,12 +120,12 @@ VALUES
     ('ADMIN', 'Ma dostęp do wszystkiego'),
     ('VICEADMIN', 'Ma dostęp do moderowania'),
      ('USER', 'Dostęp tylko do odczytu');
---INSERT INTO
--- user_roles (user_name, user_role)
---VALUES
- --  ('555555555', 'ADMIN'),
- -- ('dwa', 'VICEADMIN'),
-  --('trzy', 'USER');
+INSERT INTO
+    Rola (nazwa_uzytkownika, rola)
+VALUES
+   ('bbzzyyczczeek', 'ADMIN'),
+  ('Sharyl Alldre', 'VICEADMIN'),
+  ('Rochella Barkway', 'USER');
 
 
 insert into  wyporzyczone (wyporzyczajacy,ksiazki)

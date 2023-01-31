@@ -26,8 +26,10 @@ public class Person {
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable (name = "wyporzyczone"
             ,joinColumns = @JoinColumn(name = "wyporzyczajacy",referencedColumnName = "lastName")
-            ,inverseJoinColumns = @JoinColumn(name ="ksiazki",referencedColumnName = "bookName")
-    )
+            ,inverseJoinColumns = @JoinColumn(name ="ksiazki",referencedColumnName = "bookName"))
+
+
+
     private Set<Book>bookSet =new TreeSet<>();
 
     public long getId() {
