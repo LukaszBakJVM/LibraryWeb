@@ -1,12 +1,12 @@
 package com.example.LibraryWeb.security;
 
+
 import com.example.LibraryWeb.Person.Person;
 import jakarta.persistence.*;
 
 import java.util.HashSet;
-
-import java.util.LinkedHashSet;
 import java.util.Set;
+
 
 @Entity
 
@@ -16,12 +16,8 @@ public class UserRole {
     private long id;
     private String role;
     private String description;
-    @ManyToMany
 
-    @JoinTable (name = "Rola"
-            ,joinColumns = @JoinColumn(name = "rola",referencedColumnName = "role")
-            ,inverseJoinColumns = @JoinColumn(name ="nazwa_uzytkownika",referencedColumnName = "userName"))
-    private Set<Person>personRole=new LinkedHashSet<>();
+
 
     public long getId() {
         return id;
@@ -47,11 +43,5 @@ public class UserRole {
         this.description = description;
     }
 
-    public Set<Person> getPersonRole() {
-        return personRole;
-    }
 
-    public void setPersonRole(Set<Person> personRole) {
-        this.personRole = personRole;
-    }
 }

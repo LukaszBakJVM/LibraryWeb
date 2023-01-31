@@ -1,9 +1,12 @@
 package com.example.LibraryWeb.Person;
 
 import com.example.LibraryWeb.Book.Book;
+import com.example.LibraryWeb.security.UserRole;
 import jakarta.persistence.*;
 
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -25,12 +28,15 @@ public class Person {
    // @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     @OneToMany(fetch = FetchType.EAGER)
     @JoinTable (name = "wyporzyczone"
-            ,joinColumns = @JoinColumn(name = "wyporzyczajacy",referencedColumnName = "lastName")
+            ,joinColumns = @JoinColumn(name = "wyporzyczajacy",referencedColumnName = "userName")
             ,inverseJoinColumns = @JoinColumn(name ="ksiazki",referencedColumnName = "bookName"))
 
-
-
     private Set<Book>bookSet =new TreeSet<>();
+    @ManyToMany(fetch =FetchType.EAGER)
+    @JoinTable (name = "rola"
+            ,joinColumns = @JoinColumn(name = "nazwa_uzytkownika",referencedColumnName = "userName")
+            ,inverseJoinColumns = @JoinColumn(name ="rola",referencedColumnName = "role"))
+   private List<UserRole>rola=new ArrayList<>();
 
     public long getId() {
         return id;
@@ -94,5 +100,13 @@ public class Person {
 
     public void setBookSet(Set<Book> bookSet) {
         this.bookSet = bookSet;
+    }
+
+   public List<UserRole> getRola() {
+        return rola;
+    }
+
+    public void setRola(List<UserRole> rola) {
+        this.rola = rola;
     }
 }
