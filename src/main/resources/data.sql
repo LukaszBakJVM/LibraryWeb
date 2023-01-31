@@ -128,5 +128,5 @@ VALUES
   --('trzy', 'USER');
 
 
-insert into  Wyporzyczone (uzyrkownwik,ksiazki)
+insert into  wyporzyczone (wyporzyczajacy,ksiazki)
     values ('Marzella','Smerfy');

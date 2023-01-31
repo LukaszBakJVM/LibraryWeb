@@ -24,8 +24,8 @@ public class Person {
     private String password;
    // @OneToMany(mappedBy = "person",cascade = CascadeType.ALL)
     @OneToMany(fetch = FetchType.EAGER)
-    @JoinTable (name = "Wyporzyczone"
-            ,joinColumns = @JoinColumn(name = "uzyrkownwik",referencedColumnName = "lastName")
+    @JoinTable (name = "wyporzyczone"
+            ,joinColumns = @JoinColumn(name = "wyporzyczajacy",referencedColumnName = "lastName")
             ,inverseJoinColumns = @JoinColumn(name ="ksiazki",referencedColumnName = "bookName")
     )
     private Set<Book>bookSet =new TreeSet<>();
