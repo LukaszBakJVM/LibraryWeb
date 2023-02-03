@@ -7,25 +7,20 @@ import java.util.Comparator;
 
 @Entity
 
-public class Book implements Comparator<Book> {
+public class Book  {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     long id;
    private String bookName;
    private String author;
    private String isbn;
-   private  int quantity;
 
-    public int getQuantity() {
-        return quantity;
-    }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
+
 
     @ManyToOne
-   // @JoinColumn(name = "person_id")
+    @JoinColumn(name = "person_id")
+
   private Person person;
 
     public Book() {
@@ -63,7 +58,7 @@ public class Book implements Comparator<Book> {
         this.isbn = isbn;
     }
 
-    public Person getPerson() {
+   public Person getPerson() {
         return person;
     }
 
@@ -73,8 +68,5 @@ public class Book implements Comparator<Book> {
 
 
 
-    @Override
-    public int compare(Book o1, Book o2) {
-        return Long.compare(o1.getId(), o2.getId());
-    }
+
 }

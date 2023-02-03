@@ -15,6 +15,13 @@ public class BookDtoSaveBook {
         this.isbn = isbn;
     }
 
+    public BookDtoSaveBook(long id, String bookName, String author, String isbn) {
+        this.id = id;
+        this.bookName = bookName;
+        this.author = author;
+        this.isbn = isbn;
+    }
+
     public long getId() {
         return id;
     }

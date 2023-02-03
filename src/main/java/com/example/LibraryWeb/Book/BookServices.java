@@ -4,6 +4,8 @@ package com.example.LibraryWeb.Book;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 @Service
 public class BookServices {
@@ -47,6 +49,17 @@ public class BookServices {
 
             bookRepository.save(b);
         }
+    }
+     public    Set<BookDtoSaveBook>allAvailableBooks(){
+        return bookRepository.findBooksByPersonId(null)
+                .stream().map(book->new BookDtoSaveBook(book.getId(),book.getBookName()
+                ,book.getAuthor(),book.getIsbn()))
+                .collect(Collectors.toSet());
+
+
+
+
+
+        }
 
     }
-}

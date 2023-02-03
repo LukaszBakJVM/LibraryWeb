@@ -8,7 +8,4 @@ spring:
 
     hibernate:
       ddl-auto: create-drop
-  security:
-    user:
-      name: Lukasz
-      password: Lukasz
+

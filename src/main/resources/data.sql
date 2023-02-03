@@ -1,4 +1,4 @@
-insert into person (user_name, email, first_name, last_name, pesel, password) values ('JacquettaPessold', 'jpessold0@soup.io', 'Jacquetta', 'Pessold', '30212', null);
+insert into person (user_name, email, first_name, last_name, pesel, password) values ('JacquettaPessold', 'jpessold0@soup.io', 'Jacquetta', 'Pessold', '30212', '{noop}1');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Jed MacLleese', 'jmaclleese1@jigsy.com', 'Jed', 'MacLleese', '86', 'Sauren');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Geordie Dimbylow', 'gdimbylow2@opensource.org', 'Geordie', 'Dimbylow', '284', 'Sepulot');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Nick Losel', 'nlosel3@google.fr', 'Nick', 'Losel', '81414', 'Carlsbad');
@@ -98,13 +98,13 @@ insert into person (user_name, email, first_name, last_name, pesel, password) va
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Rochella Barkway', 'rbarkway2p@nsw.gov.au', 'Rochella', 'Barkway', '66', 'Salinas');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Granny Garey', 'ggarey2q@ovh.net', 'Granny', 'Garey', '05676', 'Kimwarer');
 insert into person (user_name, email, first_name, last_name, pesel, password) values ('Sharyl Alldre', 'salldre2r@livejournal.com', 'Sharyl', 'Alldre', '0', 'Degah Bur');
-insert into person (user_name, email, first_name, last_name, pesel, password) values ('bbzzyyczczeek','lukasz.bak@interiowy.pl', null, null, '0', 'pass');
+insert into person (user_name, email, first_name, last_name, pesel, password) values ('bbzzyyczczeek','lukasz.bak@interiowy.pl', null, null, '0', '{bcrypt}$2a$10$Ruu5GtmSVkfLeuGfz/wHUuzflCcMbwJHSBo/.Wui0EM0KIM52Gs2S');
 
 INSERT INTO
-    book(book_name,author,isbn,quantity)
+    book(book_name,author,isbn,person_id)
 VALUES
-    ('Nekroskop','Omen','12345gh',4),
-    ('Smerfy','niewoen','233rfd',8);
+    ('Nekroskop','Omen','12345gh',null),
+    ('Smerfy','niewoen','233rfd',1);
 
 
 -- superadmin@example.com / hard

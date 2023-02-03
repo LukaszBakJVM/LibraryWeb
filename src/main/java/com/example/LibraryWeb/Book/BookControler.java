@@ -12,6 +12,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.NoSuchElementException;
+import java.util.Set;
 
 
 @RestController
@@ -25,7 +26,11 @@ public class BookControler {
         this.bookServices = bookServices;
         this.objectMapper = objectMapper;
     }
-    //Admin
+
+@GetMapping("/available")
+    ResponseEntity<Set<BookDtoSaveBook>> available() {
+        return ResponseEntity.ok(bookServices.allAvailableBooks());
+    }
     @GetMapping("/{id}")
     ResponseEntity<BookDto>findById(@PathVariable long id){
         return bookServices.getBookById(id)

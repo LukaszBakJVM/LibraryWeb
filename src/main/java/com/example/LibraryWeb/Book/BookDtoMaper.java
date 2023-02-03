@@ -1,6 +1,7 @@
 package com.example.LibraryWeb.Book;
 
 
+
 import com.example.LibraryWeb.Exception.PersonNotFoundException;
 import com.example.LibraryWeb.Person.Person;
 import com.example.LibraryWeb.Person.PersonRepository;
@@ -25,7 +26,7 @@ public  class BookDtoMaper {
         book.setAuthor(bookDto.getAuthor());
         book.setIsbn(bookDto.getIsbn());
        Person person = personRepository.findById(bookDto.getPersonId())
-               .orElseThrow(()->new  PersonNotFoundException("Nie znaleziono osoby o podanym  id "));
+               .orElseThrow(()->new PersonNotFoundException("Nie znaleziono osoby o podanym  id "));
        book.setPerson(person);
 
 
@@ -53,6 +54,7 @@ public  class BookDtoMaper {
     }
     public BookDto mapBook(Book book) {
         BookDto dto = new BookDto();
+        dto.setId(book.getId());
         dto.setBookName(book.getBookName());
         dto.setAuthor(book.getAuthor());
         dto.setIsbn(book.getIsbn());

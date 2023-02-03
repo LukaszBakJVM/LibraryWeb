@@ -3,7 +3,7 @@ package com.example.LibraryWeb.Book;
 
 
 public class BookDto  {
-    long id;
+  private   long id;
     private String bookName;
     private String author;
     private String isbn;
@@ -84,5 +84,6 @@ public class BookDto  {
     public void setPersonPesel(int personPesel) {
         this.personPesel = personPesel;
     }
+
 }
 
